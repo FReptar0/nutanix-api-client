@@ -1,0 +1,51 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log
+
+# Configuration (only track example)
+config.yaml
+config.dev.yaml
+
+# Security - Private keys and certificates
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+keys/
+
+# Archive directories
+archive/
+
+# Output files
+output/
+input/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/

@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- WARNING: EXAMPLE XML FILE - CONTAINS SAMPLE DATA ONLY -->
+<!-- This file demonstrates the expected XML structure with placeholder values -->
+<!-- Replace all values with actual data from your purchase orders -->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:tns="http://www.boomi.com/connector/wss"
+	xmlns:ns1="http://www.nutanix.com/schemas/Services/Data/NTNXPartnerPO.xsd">
+	<soapenv:Header />
+	<soapenv:Body>
+		<tns:GetPurchaseOrder>
+			<ns1:DistiPODataRq>
+				<ns1:Header>
+					<ns1:SendToPartnerName>NUTANIX INC</ns1:SendToPartnerName>
+					<ns1:FromPartnerName>YOUR COMPANY NAME</ns1:FromPartnerName>
+					<ns1:FromPartnerId>CUST-XXXXXX</ns1:FromPartnerId>
+					<ns1:TransactionId>PO-12345</ns1:TransactionId>
+					<ns1:QuoteId>XQ-1234567</ns1:QuoteId>
+					<ns1:MessageDirection>Outbound</ns1:MessageDirection>
+				</ns1:Header>
+				<ns1:DistiPOData>
+					<ns1:DistiPONumber>PO-12345</ns1:DistiPONumber>
+					<ns1:DistiInternalReferenceNo>123456789</ns1:DistiInternalReferenceNo>
+					<ns1:NTNXQuoteNumber>XQ-1234567</ns1:NTNXQuoteNumber>
+					<ns1:EndUserPONumber>ENDUSER-PO-001</ns1:EndUserPONumber>
+					<ns1:ResellerPONumber>RESELLER-PO-001</ns1:ResellerPONumber>
+					<ns1:PODate>2025-01-15T12:00:00-0600</ns1:PODate>
+					<ns1:VendorDetails>
+						<ns1:Name>NUTANIX INC</ns1:Name>
+						<ns1:Address1>1740 TECHNOLOGY DR. SUITE 150</ns1:Address1>
+						<ns1:Address2 />
+						<ns1:Address3 />
+						<ns1:City>SAN JOSE</ns1:City>
+						<ns1:State>CALIFORNIA</ns1:State>
+						<ns1:ZipCode>95110</ns1:ZipCode>
+						<ns1:Country>US</ns1:Country>
+						<ns1:ContactName>VENDOR CONTACT</ns1:ContactName>
+						<ns1:ContactPhone>4081234567</ns1:ContactPhone>
+						<ns1:ContactEmail>vendor.contact@nutanix.com</ns1:ContactEmail>
+						<ns1:AdditionalInfo>
+							<ns1:Details />
+						</ns1:AdditionalInfo>
+					</ns1:VendorDetails>
+					<ns1:BillToDetails>
+						<ns1:Name>YOUR COMPANY BILLING</ns1:Name>
+						<ns1:Address1>123 MAIN STREET</ns1:Address1>
+						<ns1:Address2>SUITE 100</ns1:Address2>
+						<ns1:Address3 />
+						<ns1:City>CITY NAME</ns1:City>
+						<ns1:State>STATE</ns1:State>
+						<ns1:ZipCode>12345</ns1:ZipCode>
+						<ns1:Country>US</ns1:Country>
+						<ns1:ContactName>BILLING CONTACT</ns1:ContactName>
+						<ns1:ContactPhone>5551234567</ns1:ContactPhone>
+						<ns1:ContactEmail>billing@example.com</ns1:ContactEmail>
+					</ns1:BillToDetails>
+					<ns1:ShipToDetails>
+						<ns1:Name>SHIPPING LOCATION</ns1:Name>
+						<ns1:Address1>456 SHIPPING AVENUE</ns1:Address1>
+						<ns1:Address2>BUILDING A</ns1:Address2>
+						<ns1:Address3 />
+						<ns1:City>SHIPPING CITY</ns1:City>
+						<ns1:State>ST</ns1:State>
+						<ns1:ZipCode>54321</ns1:ZipCode>
+						<ns1:Country>US</ns1:Country>
+						<ns1:ContactName>SHIPPING CONTACT</ns1:ContactName>
+						<ns1:ContactPhone>5559876543</ns1:ContactPhone>
+						<ns1:ContactEmail>shipping@example.com</ns1:ContactEmail>
+					</ns1:ShipToDetails>
+					<ns1:ResellerDetails>
+						<ns1:Name>RESELLER COMPANY NAME</ns1:Name>
+						<ns1:Address1>789 RESELLER ROAD</ns1:Address1>
+						<ns1:Address2>FLOOR 2</ns1:Address2>
+						<ns1:Address3 />
+						<ns1:City>RESELLER CITY</ns1:City>
+						<ns1:State>ST</ns1:State>
+						<ns1:ZipCode>67890</ns1:ZipCode>
+						<ns1:Country>US</ns1:Country>
+						<ns1:ContactName>RESELLER CONTACT</ns1:ContactName>
+						<ns1:ContactPhone>5551112222</ns1:ContactPhone>
+						<ns1:ContactEmail>contact@reseller.com</ns1:ContactEmail>
+					</ns1:ResellerDetails>
+					<ns1:EndUserDetails>
+						<ns1:Name>END USER COMPANY</ns1:Name>
+						<ns1:Address1>321 END USER STREET</ns1:Address1>
+						<ns1:Address2>DEPARTMENT X</ns1:Address2>
+						<ns1:City>END USER CITY</ns1:City>
+						<ns1:State>ST</ns1:State>
+						<ns1:ZipCode>98765</ns1:ZipCode>
+						<ns1:Country>US</ns1:Country>
+						<ns1:ContactName>END USER CONTACT</ns1:ContactName>
+						<ns1:ContactPhone>5553334444</ns1:ContactPhone>
+						<ns1:ContactEmail>enduser@example.com</ns1:ContactEmail>
+					</ns1:EndUserDetails>
+					<ns1:InstallAtAddress>
+						<ns1:Name>INSTALLATION SITE</ns1:Name>
+						<ns1:Address1>987 INSTALL AVENUE</ns1:Address1>
+						<ns1:Address2>DATACENTER</ns1:Address2>
+						<ns1:Address3 />
+						<ns1:City>INSTALLATION CITY</ns1:City>
+						<ns1:State>ST</ns1:State>
+						<ns1:ZipCode>11111</ns1:ZipCode>
+						<ns1:Country>US</ns1:Country>
+						<ns1:ContactName>INSTALL CONTACT</ns1:ContactName>
+						<ns1:ContactPhone>5555556666</ns1:ContactPhone>
+						<ns1:ContactEmail />
+						<ns1:AdditionalInfo>
+							<ns1:Details />
+						</ns1:AdditionalInfo>
+					</ns1:InstallAtAddress>
+					<ns1:ShipMethod>
+						<ns1:Carrier />
+						<ns1:CarrierCode />
+						<ns1:AccountNumber />
+						<ns1:ServiceLevel />
+					</ns1:ShipMethod>
+					<ns1:DistiAddressDetails>
+						<ns1:Name>DISTRIBUTOR ADDRESS</ns1:Name>
+						<ns1:Address1>555 DISTRIBUTOR BLVD</ns1:Address1>
+						<ns1:Address2>WAREHOUSE 5</ns1:Address2>
+						<ns1:Address3 />
+						<ns1:City>DISTRIBUTOR CITY</ns1:City>
+						<ns1:State>ST</ns1:State>
+						<ns1:ZipCode>22222</ns1:ZipCode>
+						<ns1:Country>US</ns1:Country>
+						<ns1:ContactName>DISTRIBUTOR CONTACT</ns1:ContactName>
+						<ns1:ContactPhone>5557778888</ns1:ContactPhone>
+						<ns1:ContactEmail>distributor@example.com</ns1:ContactEmail>
+					</ns1:DistiAddressDetails>
+					<ns1:PaymentTerms>30</ns1:PaymentTerms>
+					<ns1:FreightTerms>FCA Origin</ns1:FreightTerms>
+					<ns1:SpecialShippingInstructions>
+						<ns1:Details />
+					</ns1:SpecialShippingInstructions>
+					<ns1:POtotal>
+						<ns1:Price>50000.00</ns1:Price>
+						<ns1:Currency>USD</ns1:Currency>
+					</ns1:POtotal>
+					<ns1:POLines>
+						<ns1:POLineDetail>
+							<ns1:LineName>1</ns1:LineName>
+							<ns1:QuoteLineNumber />
+							<ns1:ProductCode>SW-PRODUCT-CODE</ns1:ProductCode>
+							<ns1:ProductDesc>PRODUCT DESCRIPTION EXAMPLE
+							</ns1:ProductDesc>
+							<ns1:UnitCost>
+								<ns1:Price>1000.00</ns1:Price>
+								<ns1:Currency>USD</ns1:Currency>
+							</ns1:UnitCost>
+							<ns1:UOM>EA</ns1:UOM>
+							<ns1:Quantity>50</ns1:Quantity>
+							<ns1:TotalCost>
+								<ns1:Price>50000.00</ns1:Price>
+								<ns1:Currency>USD</ns1:Currency>
+							</ns1:TotalCost>
+						</ns1:POLineDetail>
+						<ns1:POLineDetail>
+							<ns1:LineName>2</ns1:LineName>
+							<ns1:QuoteLineNumber />
+							<ns1:ProductCode>Term-Months</ns1:ProductCode>
+							<ns1:ProductDesc>TERM IN MONTHS</ns1:ProductDesc>
+							<ns1:UnitCost>
+								<ns1:Price>0.10</ns1:Price>
+								<ns1:Currency>USD</ns1:Currency>
+							</ns1:UnitCost>
+							<ns1:UOM>EA</ns1:UOM>
+							<ns1:Quantity>12</ns1:Quantity>
+							<ns1:TotalCost>
+								<ns1:Price>1.20</ns1:Price>
+								<ns1:Currency>USD</ns1:Currency>
+							</ns1:TotalCost>
+						</ns1:POLineDetail>
+					</ns1:POLines>
+				</ns1:DistiPOData>
+			</ns1:DistiPODataRq>
+		</tns:GetPurchaseOrder>
+	</soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,60 @@
+# WARNING: EXAMPLE CONFIGURATION FILE - DO NOT USE AS-IS
+# This file contains placeholder values only.
+# Copy to config.yaml and update with your actual credentials.
+# NEVER commit config.yaml or any .pem files to version control!
+
+# Nutanix API Client Configuration
+# Copy this file to config.yaml and update with your actual values
+
+# Environment to use (uat or production)
+environment: uat
+
+# API Endpoints
+api:
+  uat:
+    url: https://frontline-uat.nutanix.com/frontline/v1/partner/partnerPos
+  production:
+    url: https://frontline.nutanix.com/frontline/v1/partner/partnerPos
+
+# JWT Authentication
+jwt:
+  issuer: YOUR_COMPANY_NAME
+  customer_id: CUST-XXXXXX
+  # Path to your RSA private key (Windows path)
+  private_key_path: C:\nutanix\keys\private_key.pem
+  # Token expiration in minutes
+  token_expiry_minutes: 5
+
+# File System Paths (Windows Server Deployment)
+# Update these paths to match your Windows Server installation
+paths:
+  input: C:\nutanix\input
+  output: C:\nutanix\output
+  archive_success: C:\nutanix\archive\success
+  archive_error: C:\nutanix\archive\error
+
+# Logging Configuration
+logging:
+  level:
+    uat: DEBUG
+    production: INFO
+  # Log file path (Windows path)
+  file: C:\nutanix\logs\nutanix-api-client.log
+  # Maximum log file size in MB before rotation
+  max_size_mb: 10
+  # Number of backup log files to keep
+  backup_count: 5
+
+# API Settings
+api_settings:
+  # Request timeout in seconds
+  timeout: 30
+  # Maximum retry attempts on network errors
+  max_retries: 3
+  # Delay between retries in seconds
+  retry_delay: 5
+
+# Archive Cleanup
+archive_cleanup:
+  # Default retention period in days
+  default_retention_days: 30
