@@ -3,7 +3,7 @@ Nutanix API Client Package
 A unified system for JWT generation, XML transformation, and API communication.
 """
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __author__ = 'FReptar0'
 
 from nutanix_client.core.config import Config, ConfigError
