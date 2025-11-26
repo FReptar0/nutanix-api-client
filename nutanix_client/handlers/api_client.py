@@ -121,9 +121,12 @@ class APIClient:
                         f"{response.text[:500]}"
                     )
                 
-                # Success
+                # Success - HTTP 200
                 self._get_logger().info("Request successful")
                 self._get_logger().debug(f"Response length: {len(response.text)} bytes")
+                
+                # Validate business logic in response
+                self.validate_response(response.text)
                 
                 return response.text
                 
@@ -156,6 +159,97 @@ class APIClient:
         if last_error:
             raise last_error
         raise APIError("Request failed after all retry attempts")
+    
+    def validate_response(self, response_xml: str) -> None:
+        """
+        Validate Nutanix API response for business logic errors.
+        
+        Even if HTTP status is 200, the order might be rejected.
+        This method checks the TxStatus and fault elements.
+        
+        Args:
+            response_xml: XML response from API
+            
+        Raises:
+            APIError: If transaction was rejected or contains faults
+        """
+        try:
+            from lxml import etree
+            
+            # Parse XML
+            root = etree.fromstring(response_xml.encode('utf-8'))
+            
+            # Define namespace
+            ns = {'ns1': 'http://www.nutanix.com/schemas/Services/Data/NTNXPartnerPO.xsd'}
+            
+            # Find TxStatus element
+            tx_status_elem = root.find('.//ns1:Response/ns1:TxStatus', ns)
+            
+            if tx_status_elem is not None:
+                tx_status = tx_status_elem.text.strip() if tx_status_elem.text else ""
+                
+                self._get_logger().info(f"API Transaction Status: {tx_status}")
+                
+                # Check if rejected
+                if tx_status.lower() == 'rejected':
+                    # Extract fault details
+                    error_code = ""
+                    error_detail = ""
+                    transaction_id = ""
+                    
+                    error_code_elem = root.find('.//ns1:Response/ns1:fault/ns1:Errorcode', ns)
+                    if error_code_elem is not None and error_code_elem.text:
+                        error_code = error_code_elem.text.strip()
+                    
+                    error_detail_elem = root.find('.//ns1:Response/ns1:fault/ns1:Errordetail', ns)
+                    if error_detail_elem is not None and error_detail_elem.text:
+                        error_detail = error_detail_elem.text.strip()
+                    
+                    transaction_id_elem = root.find('.//ns1:Response/ns1:TransactionID', ns)
+                    if transaction_id_elem is not None and transaction_id_elem.text:
+                        transaction_id = transaction_id_elem.text.strip()
+                    
+                    # Raise detailed error
+                    error_msg = f"Purchase Order REJECTED by Nutanix API\n"
+                    if transaction_id:
+                        error_msg += f"  Transaction ID: {transaction_id}\n"
+                    if error_code:
+                        error_msg += f"  Error Code: {error_code}\n"
+                    if error_detail:
+                        error_msg += f"  Error Detail: {error_detail}"
+                    else:
+                        error_msg += "  No error details provided"
+                    
+                    self._get_logger().error(error_msg)
+                    raise APIError(error_msg)
+                
+                elif tx_status.lower() in ['received', 'accepted', 'pending']:
+                    # These are success states
+                    self._get_logger().info(f"✓ Purchase Order {tx_status}")
+                    return
+                else:
+                    # Unknown status - log warning but don't fail
+                    self._get_logger().warning(
+                        f"Unknown TxStatus '{tx_status}' - treating as success. "
+                        f"Please verify with Nutanix API documentation."
+                    )
+                    return
+            else:
+                # No TxStatus found - log warning
+                self._get_logger().warning(
+                    "No TxStatus element found in response. "
+                    "Cannot validate transaction status."
+                )
+                
+        except APIError:
+            # Re-raise our own errors
+            raise
+        except Exception as e:
+            # XML parsing errors - log but don't fail
+            self._get_logger().warning(
+                f"Could not validate response XML: {e}. "
+                f"Proceeding anyway."
+            )
     
     def save_response(self, response_xml: str, output_path: Path, 
                      po_number: Optional[str] = None) -> Path:
